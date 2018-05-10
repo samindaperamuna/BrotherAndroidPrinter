@@ -11,7 +11,7 @@ import fifthgen.com.brotherandroidprinter.ui.fragment.AsyncResponse;
 
 public class PrinterHelper implements AsyncResponse {
 
-    private WeakReference<Activity> activityReference;
+    private final WeakReference<Activity> activityReference;
 
     public PrinterHelper(Activity activity) {
         this.activityReference = new WeakReference<>(activity);

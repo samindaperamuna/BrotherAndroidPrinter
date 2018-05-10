@@ -12,13 +12,12 @@ import fifthgen.com.brotherandroidprinter.ui.fragment.AsyncResponse;
 
 public class PrinterTask extends AsyncTask<String, Void, String> {
 
-    private String ip;
-    private int labelNameIndex;
+    private final AsyncResponse asyncResponse;
+    private final String ip;
+    private final int labelNameIndex;
 
     private Printer printer;
     private String message;
-
-    private AsyncResponse asyncResponse;
 
     PrinterTask(AsyncResponse asyncResponse, String ip, int labelNameIndex) {
         this.asyncResponse = asyncResponse;
