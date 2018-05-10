@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.brother.ptouch.sdk.NetPrinter;
 import com.brother.ptouch.sdk.Printer;
 import com.brother.ptouch.sdk.PrinterInfo;
 import com.brother.ptouch.sdk.PrinterStatus;
@@ -14,14 +15,16 @@ public class PrinterTask extends AsyncTask<String, Void, String> {
 
     private final AsyncResponse asyncResponse;
     private final String ip;
+    private final String mac;
     private final int labelNameIndex;
 
     private Printer printer;
     private String message;
 
-    PrinterTask(AsyncResponse asyncResponse, String ip, int labelNameIndex) {
+    PrinterTask(AsyncResponse asyncResponse, String ip, String mac, int labelNameIndex) {
         this.asyncResponse = asyncResponse;
         this.ip = ip;
+        this.mac = mac;
         this.labelNameIndex = labelNameIndex;
     }
 
@@ -29,7 +32,7 @@ public class PrinterTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
 
         if (params.length > 0) {
-            if (setupPrinter(ip, labelNameIndex)) {
+            if (setupPrinter(ip, mac, labelNameIndex)) {
                 Bitmap imageToPrint = ImageUtil.textAsBitMap(params);
 
                 print(imageToPrint);
@@ -44,7 +47,7 @@ public class PrinterTask extends AsyncTask<String, Void, String> {
         asyncResponse.onProcessCompleted(message);
     }
 
-    private boolean setupPrinter(String ip, int labelNameIndex) {
+    private boolean setupPrinter(String ip, String mac, int labelNameIndex) {
 
         try {
             printer = new Printer();
@@ -59,6 +62,7 @@ public class PrinterTask extends AsyncTask<String, Void, String> {
             printerInfo.align = PrinterInfo.Align.CENTER;
             printerInfo.printMode = PrinterInfo.PrintMode.ORIGINAL;
             printerInfo.numberOfCopies = 1;
+            printerInfo.macAddress = mac;
             printerInfo.ipAddress = ip;
 
             printerInfo.labelNameIndex = labelNameIndex;

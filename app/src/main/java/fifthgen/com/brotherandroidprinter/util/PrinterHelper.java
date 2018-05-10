@@ -23,6 +23,7 @@ public class PrinterHelper implements AsyncResponse {
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
 
         String ip = sharedPref.getString(PreferenceKeys.IP, "");
+        String mac = sharedPref.getString(PreferenceKeys.MAC, "");
         int labelNameIndex = sharedPref.getInt(PreferenceKeys.LABEL_NAME_INDEX, 0);
 
         if (ip.isEmpty()) {
@@ -30,10 +31,8 @@ public class PrinterHelper implements AsyncResponse {
         } else if (labelNameIndex == 0) {
             Toast.makeText(activity, "Invalid label type.", Toast.LENGTH_SHORT).show();
         } else {
-            PrinterTask printerTask = new PrinterTask(this, ip, labelNameIndex);
+            PrinterTask printerTask = new PrinterTask(this, ip, mac, labelNameIndex);
             printerTask.execute(text);
-
-            Toast.makeText(activity, "Data sent to printer.", Toast.LENGTH_SHORT).show();
         }
     }
 
