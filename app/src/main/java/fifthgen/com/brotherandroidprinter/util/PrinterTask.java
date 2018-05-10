@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.brother.ptouch.sdk.NetPrinter;
 import com.brother.ptouch.sdk.Printer;
 import com.brother.ptouch.sdk.PrinterInfo;
 import com.brother.ptouch.sdk.PrinterStatus;
@@ -91,8 +90,8 @@ public class PrinterTask extends AsyncTask<String, Void, String> {
 
         if (printerStatus.errorCode != PrinterInfo.ErrorCode.ERROR_NONE) {
             message = "Couldn't print label. Error code : " + printerStatus.errorCode;
+        } else {
+            message = "All documents successfully sent to printer.";
         }
-
-        message = "All documents successfully sent to printer.";
     }
 }
