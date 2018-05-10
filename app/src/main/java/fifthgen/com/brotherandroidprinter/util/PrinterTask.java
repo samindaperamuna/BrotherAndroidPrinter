@@ -8,6 +8,8 @@ import com.brother.ptouch.sdk.Printer;
 import com.brother.ptouch.sdk.PrinterInfo;
 import com.brother.ptouch.sdk.PrinterStatus;
 
+import fifthgen.com.brotherandroidprinter.ui.fragment.AsyncResponse;
+
 public class PrinterTask extends AsyncTask<String, Void, String> {
 
     private String ip;
@@ -16,8 +18,10 @@ public class PrinterTask extends AsyncTask<String, Void, String> {
     private Printer printer;
     private String message;
 
+    private AsyncResponse asyncResponse;
 
-    public PrinterTask(String ip, int labelNameIndex) {
+    PrinterTask(AsyncResponse asyncResponse, String ip, int labelNameIndex) {
+        this.asyncResponse = asyncResponse;
         this.ip = ip;
         this.labelNameIndex = labelNameIndex;
     }
@@ -34,6 +38,11 @@ public class PrinterTask extends AsyncTask<String, Void, String> {
         }
 
         return message;
+    }
+
+    @Override
+    protected void onPostExecute(String message) {
+        asyncResponse.onProcessCompleted(message);
     }
 
     private boolean setupPrinter(String ip, int labelNameIndex) {

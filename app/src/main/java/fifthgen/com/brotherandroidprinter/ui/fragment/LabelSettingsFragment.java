@@ -1,8 +1,6 @@
 package fifthgen.com.brotherandroidprinter.ui.fragment;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,12 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import fifthgen.com.brotherandroidprinter.R;
 import fifthgen.com.brotherandroidprinter.util.ImageUtil;
-import fifthgen.com.brotherandroidprinter.util.PreferenceKeys;
-import fifthgen.com.brotherandroidprinter.util.PrinterTask;
+import fifthgen.com.brotherandroidprinter.util.PrinterHelper;
 
 public class LabelSettingsFragment extends Fragment implements View.OnClickListener {
 
@@ -76,19 +72,8 @@ public class LabelSettingsFragment extends Fragment implements View.OnClickListe
                     Activity activity = getActivity();
 
                     if (activity != null) {
-                        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
-
-                        String ip = sharedPref.getString(PreferenceKeys.IP, "");
-                        int labelNameIndex = sharedPref.getInt(PreferenceKeys.LABEL_NAME_INDEX, 0);
-
-                        if (ip.isEmpty()) {
-                            Toast.makeText(activity, "Invalid IP address.", Toast.LENGTH_SHORT).show();
-                        } else if (labelNameIndex == 0) {
-                            Toast.makeText(activity, "Invalid label type.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            PrinterTask printerTask = new PrinterTask(ip, labelNameIndex);
-                            printerTask.execute(text);
-                        }
+                        PrinterHelper printerHelper = new PrinterHelper(activity);
+                        printerHelper.print(text);
                     }
                 }
                 break;

@@ -28,6 +28,7 @@ import java.util.TreeMap;
 import fifthgen.com.brotherandroidprinter.R;
 import fifthgen.com.brotherandroidprinter.util.IPAddressTextWatcher;
 import fifthgen.com.brotherandroidprinter.util.PreferenceKeys;
+import fifthgen.com.brotherandroidprinter.util.PrinterHelper;
 
 public class PrinterSettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener,
         View.OnClickListener {
@@ -196,6 +197,13 @@ public class PrinterSettingsFragment extends Fragment implements AdapterView.OnI
 
                 break;
             case R.id.testButton:
+                Activity activity = getActivity();
+
+                if (activity != null) {
+                    String[] text = {"Test User", "Test Company", "Test Position"};
+                    PrinterHelper printerHelper = new PrinterHelper(activity);
+                    printerHelper.print(text);
+                }
                 break;
         }
     }
