@@ -125,17 +125,17 @@ public class PrinterSettingsFragment extends Fragment implements AdapterView.OnI
             switch (selection) {
                 case "PT":
                     for (LabelInfo.PT type : LabelInfo.PT.values()) {
-                        labelTypes.put(type.getId(), type.name());
+                        labelTypes.put(type.ordinal(), type.name());
                     }
                     break;
                 case "QL700":
                     for (LabelInfo.QL700 type : LabelInfo.QL700.values()) {
-                        labelTypes.put(type.getId(), type.name());
+                        labelTypes.put(type.ordinal(), type.name());
                     }
                     break;
                 case "QL1100":
                     for (LabelInfo.QL1100 type : LabelInfo.QL1100.values()) {
-                        labelTypes.put(type.getId(), type.name());
+                        labelTypes.put(type.ordinal(), type.name());
                     }
                     break;
                 case "PT3":
@@ -145,7 +145,7 @@ public class PrinterSettingsFragment extends Fragment implements AdapterView.OnI
                     break;
                 case "QL1115":
                     for (LabelInfo.QL1115 type : LabelInfo.QL1115.values()) {
-                        labelTypes.put(type.getId(), type.name());
+                        labelTypes.put(type.ordinal(), type.name());
                     }
                     break;
             }

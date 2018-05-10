@@ -59,7 +59,7 @@ public class PrinterTask extends AsyncTask<String, Void, String> {
             printerInfo.orientation = PrinterInfo.Orientation.LANDSCAPE;
             printerInfo.valign = PrinterInfo.VAlign.MIDDLE;
             printerInfo.align = PrinterInfo.Align.CENTER;
-            printerInfo.printMode = PrinterInfo.PrintMode.ORIGINAL;
+            printerInfo.printMode = PrinterInfo.PrintMode.FIT_TO_PAPER;
             printerInfo.numberOfCopies = 1;
             printerInfo.macAddress = mac;
             printerInfo.ipAddress = ip;
@@ -90,6 +90,7 @@ public class PrinterTask extends AsyncTask<String, Void, String> {
 
         if (printerStatus.errorCode != PrinterInfo.ErrorCode.ERROR_NONE) {
             message = "Couldn't print label. Error code : " + printerStatus.errorCode;
+            Log.e(getClass().getName(), message);
         } else {
             message = "All documents successfully sent to printer.";
         }
